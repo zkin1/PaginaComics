@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tienda de Cómics</title>
+  <link rel="stylesheet" href="../css/carrusel.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+      <a class="navbar-brand" href="#">Comics Sharingann</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html" id="inicio-link">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="productos.html" id="comics-link">Cómics</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="login.html" id="login-link">Iniciar sesión</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="register.html" id="registro-link">Registro</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+  <div class="container my-5">
+    <h1 class="text-center mb-4">Comics Sharingann</h1>
+    <div class="row justify-content-center mb-4">
+      <div class="col-md-6">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Buscar cómics" id="search-input">
+          <div class="input-group-append">
+            <button class="btn btn-primary" type="button" id="search-btn">Buscar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="filtered-comics-list" class="row">
+      
+    </div>
+    <div id="all-comics-list" class="row">
+     
+    </div>
+  </div>
+
+  <div id="carouselProductos" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+      
+    </ol>
+    <div class="carousel-inner">
+      
+    </div>
+    <a class="carousel-control-prev" href="#carouselProductos" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Anterior</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselProductos" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Siguiente</span>
+    </a>
+  </div> 
+
+  <div class="modal fade" id="comicModal" tabindex="-1" role="dialog" aria-labelledby="comicModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="comicModalLabel"></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <img id="comicModalImage" src="" alt="" class="img-fluid mb-3">
+          <p id="comicModalDescripcion"></p>
+          <p>Precio: <span id="comicModalPrecio"></span></p>
+          <p>Stock: <span id="comicModalStock"></span></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary" id="addToCartBtn">Agregar al carrito</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="../js/api.js"></script>
+  <script src="../js/buscador.js"></script>
+  <script src="../js/carrusel.js"></script>
+</body>
+</html>
