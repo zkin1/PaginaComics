@@ -37,7 +37,7 @@ function renderComics(comicData) {
                   <p><strong>Descripción:</strong> ${comic.descripcion}</p>
                   <p><strong>Precio:</strong> $${comic.precio}</p>
                   <p><strong>Stock:</strong> ${comic.stock}</p>
-                  <button type="button" class="btn btn-success add-to-cart" data-id="${comic.id}">Agregar al carrito</button>
+                  <button type="button" class="btn btn-success add-to-cart" data-name="${comic.nombre}">Agregar al carrito</button>
                 </div>
               </div>
             </div>
@@ -54,14 +54,13 @@ function renderComics(comicData) {
 // Función para agregar un producto al carro
 function addToCart(comic) {
   const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-  const existingItem = cartItems.find(item => item.id === comic.id);
+  const existingItem = cartItems.find(item => item.nombre === comic.nombre);
 
   if (existingItem) {
     existingItem.quantity++;
     existingItem.subtotal = existingItem.precio * existingItem.quantity;
   } else {
     const newItem = {
-      id: comic.id,
       nombre: comic.nombre,
       precio: comic.precio,
       foto: comic.foto,
@@ -72,7 +71,25 @@ function addToCart(comic) {
   }
 
   localStorage.setItem('cartItems', JSON.stringify(cartItems));
+
+  // Mostrar el modal de confirmación
+  $('#addToCartModal').modal('show');
 }
+
+// Evento para agregar un producto al carro
+comicsContainer.on('click', '.add-to-cart', function() {
+  const comicName = $(this).data('name');
+  if (comicName) {
+    const comic = comics.find(comic => comic.nombre === comicName);
+    if (comic) {
+      addToCart(comic);
+    } else {
+      console.error('Comic not found with name:', comicName);
+    }
+  } else {
+    console.error('Invalid comic name');
+  }
+});
 
 // Obtener los cómics de la API
 fetch('http://localhost:3000/api/comics')
@@ -88,10 +105,3 @@ fetch('http://localhost:3000/api/comics')
   .catch(error => {
     console.error('Error al obtener los cómics:', error);
   });
-
-// Evento para agregar un producto al carro
-comicsContainer.on('click', '.add-to-cart', function() {
-  const comicId = $(this).data('id');
-  const comic = comics.find(comic => comic.id === comicId);
-  addToCart(comic);
-});

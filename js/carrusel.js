@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const carouselInner = carouselProductos.querySelector('.carousel-inner');
   const carouselIndicators = carouselProductos.querySelector('.carousel-indicators');
 
-  // Realizar una solicitud a la API para obtener los datos de los productos
+
   fetch('http://localhost:3000/api/comics')
     .then(response => response.json())
     .then(data => {

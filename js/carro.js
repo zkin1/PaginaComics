@@ -1,9 +1,11 @@
 // Obtener referencias a los elementos del DOM
 const cartItemsContainer = document.getElementById('cartItems');
 const cartTotalElement = document.getElementById('cartTotal');
+const cartItemCountElement = document.getElementById('cartItemCount');
 
-// Funcion para renderizar los elementos del carro
+// Función para renderizar los elementos del carro
 function renderCartItems(cartItems) {
+  console.log('Renderizando elementos del carro:', cartItems);
   cartItemsContainer.innerHTML = '';
 
   cartItems.forEach((item, index) => {
@@ -24,29 +26,41 @@ function renderCartItems(cartItems) {
     `;
     cartItemsContainer.appendChild(row);
   });
+
+  // Actualizar el contador de elementos en el carro
+  cartItemCountElement.textContent = cartItems.length;
 }
 
-// Funcion para calcular el total del carro
+// Función para calcular el total del carro
 function calculateCartTotal(cartItems) {
-  const total = cartItems.reduce((acc, item) => acc + item.subtotal, 0);
-  cartTotalElement.textContent = `$${total.toFixed(2)}`;
-}
-
-// Funcion para actualizar la cantidad de un elemento del carro
+    const total = cartItems.reduce((acc, item) => {
+      if (typeof item.subtotal === 'number') {
+        return acc + item.subtotal;
+      } else {
+        return acc;
+      }
+    }, 0);
+    cartTotalElement.textContent = `$${total.toFixed(2)}`;
+  }
+// Función para actualizar la cantidad de un elemento del carro
 function updateCartItemQuantity(index, quantity) {
+  console.log('Actualizando cantidad del elemento del carro:', index, quantity);
   const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
   cartItems[index].quantity = quantity;
   cartItems[index].subtotal = cartItems[index].precio * quantity;
   localStorage.setItem('cartItems', JSON.stringify(cartItems));
+  console.log('Datos del carro actualizados en el almacenamiento local:', cartItems);
   renderCartItems(cartItems);
   calculateCartTotal(cartItems);
 }
 
-// Funcion para eliminar un elemento del carro
+// Función para eliminar un elemento del carro
 function removeCartItem(index) {
+  console.log('Eliminando elemento del carro:', index);
   const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
   cartItems.splice(index, 1);
   localStorage.setItem('cartItems', JSON.stringify(cartItems));
+  console.log('Datos del carro actualizados en el almacenamiento local:', cartItems);
   renderCartItems(cartItems);
   calculateCartTotal(cartItems);
 }
@@ -68,7 +82,7 @@ cartItemsContainer.addEventListener('click', (event) => {
   }
 });
 
-// Obtener los elementos del carro del almacenamiento local al cargar la pagina
+// Obtener los elementos del carro del almacenamiento local al cargar la página
 const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
 renderCartItems(cartItems);
 calculateCartTotal(cartItems);
