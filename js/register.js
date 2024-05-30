@@ -18,14 +18,23 @@ registerForm.addEventListener('submit', (event) => {
   }
 
   // Aquí puedes realizar la lógica de registro
-  // Por ejemplo, enviar los datos a una API o guardarlos en una base de datos
-  console.log('Registro exitoso:', { username, email, password });
-  alert('Registro exitoso');
-
-  // Almacenar los datos del usuario registrado en localStorage
-  localStorage.setItem('username', username);
-  localStorage.setItem('password', password);
-
-  // Redirigir al usuario a la página de inicio de sesión
-  window.location.href = 'login.html';
-});
+  // Enviar los datos a la API
+  fetch('http://localhost:3001/api/registros', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ usuario: username, email: email, contraseña: password })
+  })
+    .then(response => response.text())
+    .then(data => {
+      console.log(data);
+      alert('Registro exitoso');
+      // Redirigir al usuario a la página de inicio de sesión
+      window.location.href = 'login.html';
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert('Error al registrar el usuario');
+    });
+}); // Cerrar el bloque de la función addEventListener y el bloque del archivo register.js
