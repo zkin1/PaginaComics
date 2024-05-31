@@ -3,7 +3,6 @@ document.addEventListener('DOMContentLoaded', function() {
   const carouselInner = carouselProductos.querySelector('.carousel-inner');
   const carouselIndicators = carouselProductos.querySelector('.carousel-indicators');
 
-
   fetch('http://localhost:3000/api/comics')
     .then(response => response.json())
     .then(data => {
@@ -28,13 +27,13 @@ document.addEventListener('DOMContentLoaded', function() {
           carouselItem.classList.add('active');
         }
         carouselItem.innerHTML = `
-        <a href="./productos.html?index=${index}">
-          <img src="http://localhost:3000${producto.foto}" alt="${producto.nombre}">
-          <div class="carousel-caption">
-            <h3>${producto.nombre}</h3>
-          </div>
-        </a>
-      `;
+          <a href="productos.html?comic=${encodeURIComponent(producto.nombre)}">
+            <img src="http://localhost:3000${producto.foto}" alt="${producto.nombre}">
+            <div class="carousel-caption">
+              <h3>${producto.nombre}</h3>
+            </div>
+          </a>
+        `;
         carouselInner.appendChild(carouselItem);
       });
     })
@@ -42,4 +41,3 @@ document.addEventListener('DOMContentLoaded', function() {
       console.error('Error al obtener los productos:', error);
     });
 });
-
