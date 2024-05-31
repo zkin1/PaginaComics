@@ -27,3 +27,25 @@
     background-color: #ff0000;
     color: #ffffff; 
   }
+  footer.footer {
+    margin-top: 50px;
+    background-image: url(../img/fondo1.jpg);
+  }
+  
+  footer.footer h5 {
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+  
+  footer.footer ul.list-unstyled li {
+    margin-bottom: 0.5rem;
+  }
+  
+  footer.footer ul.list-unstyled li a {
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  footer.footer ul.list-unstyled li a:hover {
+    color: #ccc;
+  }
