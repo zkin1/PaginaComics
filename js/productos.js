@@ -49,6 +49,18 @@ function renderComics(comicData) {
   });
 
   comics = comicData; // Asignar los datos de los cómics a la variable 'comics'
+
+  // Verificar si hay un parámetro 'comic' en la URL
+  const urlParams = new URLSearchParams(window.location.search);
+  const comicName = urlParams.get('comic');
+  if (comicName) {
+    const decodedComicName = decodeURIComponent(comicName);
+    const comic = comics.find(comic => comic.nombre === decodedComicName);
+    if (comic) {
+      const index = comics.indexOf(comic);
+      $(`#comicModal${index}`).modal('show');
+    }
+  }
 }
 
 // Función para agregar un producto al carro
