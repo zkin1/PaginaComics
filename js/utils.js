@@ -27,5 +27,16 @@ function logout() {
   window.location.href = 'index.html';
 }
 
+function updateCartItemCount() {
+  const cartItemCountElement = document.getElementById('cartItemCount');
+  const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+  cartItemCountElement.textContent = cartItems.length;
+}
+
+// Llamar a la función para actualizar el contador al cargar la página
+document.addEventListener('DOMContentLoaded', () => {
+  updateCartItemCount();
+});
+
 // Llamar a la función checkLoginStatus al cargar la página
 window.onload = checkLoginStatus;
