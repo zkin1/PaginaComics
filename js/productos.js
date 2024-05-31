@@ -1,5 +1,5 @@
 let comics = []; // Declarar la variable 'comics' fuera de la función de renderizado
-
+let cartItems = [];
 const comicsContainer = $('#comics-list');
 
 // Función para renderizar los cómics
@@ -65,31 +65,46 @@ function renderComics(comicData) {
 
 // Función para agregar un producto al carro
 function addToCart(comic) {
-  const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-  const existingItem = cartItems.find(item => item.nombre === comic.nombre);
+  const loggedInUser = localStorage.getItem('loggedInUser');
 
-  if (existingItem) {
-    existingItem.quantity++;
-    existingItem.subtotal = existingItem.precio * existingItem.quantity;
+  if (!loggedInUser) {
+    alert('Debes iniciar sesión para agregar productos al carro');
+    window.location.href = 'login.html';
+    return;
   } else {
-    const newItem = {
-      nombre: comic.nombre,
-      precio: comic.precio,
-      foto: comic.foto,
-      quantity: 1,
-      subtotal: comic.precio
-    };
-    cartItems.push(newItem);
+    const existingItem = cartItems.find(item => item.nombre === comic.nombre);
+
+    if (existingItem) {
+      existingItem.quantity++;
+      existingItem.subtotal = existingItem.precio * existingItem.quantity;
+    } else {
+      const newItem = {
+        nombre: comic.nombre,
+        precio: comic.precio,
+        foto: comic.foto,
+        quantity: 1,
+        subtotal: comic.precio
+      };
+      cartItems.push(newItem);
+    }
+
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+    updateCartItemCount(); // Actualizar el contador después de agregar un elemento al carro
+
+    // Mostrar el modal de confirmación
+    $('#addToCartModal').modal('show');
   }
-
-  localStorage.setItem('cartItems', JSON.stringify(cartItems));
-
-  // Mostrar el modal de confirmación
-  $('#addToCartModal').modal('show');
 }
-
 // Evento para agregar un producto al carro
 comicsContainer.on('click', '.add-to-cart', function() {
+  const loggedInUser = localStorage.getItem('loggedInUser');
+
+  if (!loggedInUser) {
+    alert('Debes iniciar sesión para agregar productos al carro');
+    window.location.href = 'login.html';
+    return;
+  }
+
   const comicName = $(this).data('name');
   if (comicName) {
     const comic = comics.find(comic => comic.nombre === comicName);

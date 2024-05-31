@@ -24,6 +24,9 @@ function checkLoginStatus() {
 // Cerrar sesión
 function logout() {
   localStorage.removeItem('loggedInUser');
+  localStorage.removeItem('cartItems'); 
+  cartItems = [];
+  updateCartItemCount(); 
   window.location.href = 'index.html';
 }
 

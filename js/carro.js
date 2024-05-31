@@ -42,7 +42,7 @@ function calculateCartTotal(cartItems) {
     }, 0);
     cartTotalElement.textContent = `$${total.toFixed(2)}`;
   }
-// Función para actualizar la cantidad de un elemento del carro
+
 function updateCartItemQuantity(index, quantity) {
   console.log('Actualizando cantidad del elemento del carro:', index, quantity);
   const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
@@ -54,7 +54,6 @@ function updateCartItemQuantity(index, quantity) {
   calculateCartTotal(cartItems);
 }
 
-// Función para eliminar un elemento del carro
 function removeCartItem(index) {
   console.log('Eliminando elemento del carro:', index);
   const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
@@ -65,7 +64,12 @@ function removeCartItem(index) {
   calculateCartTotal(cartItems);
 }
 
-// Evento para actualizar la cantidad de un elemento del carro
+function updateCartItemCount() {
+  const cartItemCountElement = document.getElementById('cartItemCount');
+  cartItemCountElement.textContent = cartItems.length;
+}
+
+
 cartItemsContainer.addEventListener('change', (event) => {
   if (event.target.classList.contains('quantity')) {
     const index = parseInt(event.target.dataset.index);
@@ -74,13 +78,14 @@ cartItemsContainer.addEventListener('change', (event) => {
   }
 });
 
-// Evento para eliminar un elemento del carro
 cartItemsContainer.addEventListener('click', (event) => {
   if (event.target.classList.contains('remove-item')) {
     const index = parseInt(event.target.dataset.index);
     removeCartItem(index);
   }
 });
+
+
 
 // Obtener los elementos del carro del almacenamiento local al cargar la página
 const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];

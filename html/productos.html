@@ -9,6 +9,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <link rel="stylesheet" href="./assets/css/styleIndex.css">
   <title>Productos</title>
 </head>
@@ -29,20 +30,20 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="carro.html" id="carro-link">
-              <i class="fas fa-shopping-cart"></i> Carro <span id="cartItemCount" class="badge badge-pill badge-primary">0</span>
+              <i class='bx bx-cart'></i> Carro <span id="cartItemCount" class="badge badge-pill badge-primary">0</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="login.html" id="login-link">Iniciar sesión</a>
+            <a class="nav-link" href="login.html" id="login-link"><i class='bx bx-user'></i> Iniciar sesión</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="register.html" id="registro-link">Registro</a>
+            <a class="nav-link" href="register.html" id="registro-link"><i class='bx bx-user-plus'></i> Registro</a>
           </li>
           <li class="nav-item" id="user-info" style="display: none;">
             <span class="nav-link">Bienvenido, <span id="username-display"></span></span>
           </li>
           <li class="nav-item" id="logout-link" style="display: none;">
-            <a class="nav-link" href="#" onclick="logout()">Cerrar sesión</a>
+            <a class="nav-link" href="index.html" onclick="logout()"><i class='bx bx-log-out'></i> Cerrar sesión</a>
           </li>
         </ul>
       </div>

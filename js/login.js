@@ -15,13 +15,19 @@ loginForm.addEventListener('submit', (event) => {
       if (user) {
         alert('Inicio de sesión exitoso');
         localStorage.setItem('loggedInUser', user.usuario);
-        window.location.href = 'index.html';
+        const previousPage = localStorage.getItem('previousPage');
+        if (previousPage) {
+          window.location.href = previousPage;
+          localStorage.removeItem('previousPage');
+        } else {
+          window.location.href = 'index.html';
+        }
       } else {
         alert('Credenciales incorrectas');
       }
     })
     .catch(error => {
       console.error('Error:', error);
-      alert('Error al obtener los datos de usuario');
+      alert('Error al obtener los datos de usuario')
     });
 });
