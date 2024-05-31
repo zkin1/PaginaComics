@@ -1,3 +1,6 @@
+let loggedInUser = null;
+
+
 const loginForm = document.getElementById('login-form');
 
 loginForm.addEventListener('submit', (event) => {
@@ -11,7 +14,7 @@ loginForm.addEventListener('submit', (event) => {
       const user = data.find(user => user.usuario === username && user.contraseña === password);
       if (user) {
         alert('Inicio de sesión exitoso');
-        // Redirigir al usuario a la página de inicio
+        localStorage.setItem('loggedInUser', user.usuario);
         window.location.href = 'index.html';
       } else {
         alert('Credenciales incorrectas');
@@ -21,4 +24,4 @@ loginForm.addEventListener('submit', (event) => {
       console.error('Error:', error);
       alert('Error al obtener los datos de usuario');
     });
-}); // Cerrar el bloque de la función addEventListener del formulario de login
+});
